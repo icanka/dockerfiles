@@ -13,6 +13,9 @@ your Scrapy projects and control their spiders using a HTTP JSON API.
 
 Deploy and Control your spiders from host.Image does not include scrapyd-client nor scrapyd_api.
 
+- `scrapy`: git+https://github.com/scrapy/scrapy.git
+- `scrapyd`: git+https://github.com/scrapy/scrapyd.git
+
 ## Run it as background-daemon.
 
 ```sh
