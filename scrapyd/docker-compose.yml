@@ -1,0 +1,17 @@
+scrapyd:
+  image: raflman/scrapyd
+  ports:
+    - "6800:6800"
+  volumes:
+    - ./data:/scrapyd
+    - scrapy-packages-vol:/usr/lib/python3.6/site-packages
+  restart: always
+
+scrapy:
+  image: raflman/scrapyd
+  command: sh
+  volumes:
+    - .:/code
+    - scrapy-packages-vol:/usr/lib/python3.6/site-packages
+  working_dir: /code
+  restart: always
