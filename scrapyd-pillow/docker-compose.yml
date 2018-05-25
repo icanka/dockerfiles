@@ -1,10 +1,10 @@
 scrapyd:
-  image: raflman/scrapyd
+  image: raflman/scrapyd:pillow
   ports:
     - "6800:6800"
   volumes:
     - ./data:/scrapyd
-    - scrapyd-packages:/usr/lib/python3.6/site-packages
+    - scrapyd-pillow-packages:/usr/lib/python3.6/site-packages
   restart: always
 
 scrapy:
@@ -12,6 +12,6 @@ scrapy:
   command: sh
   volumes:
     - .:/code
-    - scrapyd-packages:/usr/lib/python3.6/site-packages
+    - scrapyd-pillow-packages:/usr/lib/python3.6/site-packages
   working_dir: /code
   restart: always
