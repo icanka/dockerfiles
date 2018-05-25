@@ -36,7 +36,7 @@ scrapy:
   restart: always
 ```
 
-## Run it as background-daemon.
+## As background-daemon.
 
 ```bash
 $ docker-compose up -d scrapyd
@@ -57,6 +57,36 @@ default = myproject.settings
 [deploy]
 url = http://localhost:6800/
 project = myproject
+```
+
+## As interactive-shell for scrapy
+
+```bash
+$ cat > quotes_spider.py << _EOF_
+import scrapy
+
+
+class QuotesSpider(scrapy.Spider):
+    name = "quotes"
+    start_urls = [
+        'http://quotes.toscrape.com/tag/humor/',
+    ]
+
+    def parse(self, response):
+        for quote in response.css('div.quote'):
+            yield {
+                'text': quote.css('span.text::text').extract_first(),
+                'author': quote.xpath('span/small/text()').extract_first(),
+            }
+
+        next_page = response.css('li.next a::attr("href")').extract_first()
+        if next_page is not None:
+            yield response.follow(next_page, self.parse)
+_EOF_
+
+$ docker-compose run --rm scrapy
+>>> scrapy runspider quotes_spider.py -o quotes.json
+>>> exit
 ```
 
 
