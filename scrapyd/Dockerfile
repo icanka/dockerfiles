@@ -6,7 +6,8 @@ ENV BUILD_PACKAGES build-base libxslt-dev libxml2-dev libffi-dev python3-dev ope
 RUN apk add --no-cache $RUNTIME_PACKAGES && \
     update-ca-certificates && \
     apk --no-cache add --virtual build-dependencies $BUILD_PACKAGES && \
-    pip3.6 --no-cache-dir install scrapyd && \
+    pip3 --no-cache-dir install --upgrade pip && \
+    pip3 --no-cache-dir install scrapyd && \
     apk del build-dependencies && \
     mkdir /scrapyd
 
