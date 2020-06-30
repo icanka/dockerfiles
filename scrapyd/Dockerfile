@@ -1,6 +1,6 @@
 FROM alpine
 
-ENV RUNTIME_PACKAGES ca-certificates python3 libxslt libxml2 libssl1.0
+ENV RUNTIME_PACKAGES ca-certificates python3 libxslt libxml2 libssl1.1 py3-pip
 ENV BUILD_PACKAGES build-base libxslt-dev libxml2-dev libffi-dev python3-dev openssl-dev
 
 RUN apk add --no-cache $RUNTIME_PACKAGES && \
