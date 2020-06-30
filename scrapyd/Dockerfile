@@ -16,4 +16,5 @@ COPY ./scrapyd.conf /etc/scrapyd/
 VOLUME /scrapyd
 EXPOSE 6800
 
+
 CMD ["scrapyd"]
